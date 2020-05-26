@@ -45,4 +45,4 @@ The solution tests APIs from,
         pm.response.to.be.notFound - Status code of response is checked to be 404
         pm.response.to.be.rateLimited - Checks whether response status code is 429
 ```
-Ref:[Extended Checks](https://github.com/DannyDainton/All-Things-Postman/blob/master/Examples/08_extendingOurTests.md)
+Ref: [Extended Checks](https://github.com/DannyDainton/All-Things-Postman/blob/master/Examples/08_extendingOurTests.md)
