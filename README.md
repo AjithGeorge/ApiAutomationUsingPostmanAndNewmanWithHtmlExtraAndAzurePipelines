@@ -1,6 +1,6 @@
 # API-Automation-Postman
 
-API Trsting using Postman 
+API Testing using Postman 
 
 ## Areas Covered:
 - Create API Tests Using [Postman Scripts](https://learning.postman.com/docs/postman/scripts/test-examples/)
@@ -8,7 +8,7 @@ API Trsting using Postman
 - Customized Newman Reporter -[htmlextra](https://github.com/DannyDainton/newman-reporter-htmlextra)
 - Assertions using [Chai Assertion Library](https://www.chaijs.com/api/)
 
-Main Reference: [DannyDainton:All-Things-Postman](https://github.com/DannyDainton/All-Things-Postman#example-guides)
+Main Reference: [DannyDainton: All-Things-Postman](https://github.com/DannyDainton/All-Things-Postman#example-guides)
 
 ## Overview:
 The solution tests APIs from,
