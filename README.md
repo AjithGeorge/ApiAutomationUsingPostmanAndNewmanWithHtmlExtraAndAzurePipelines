@@ -30,7 +30,6 @@ The solution tests APIs from,
 4. Report is will get generated for the execution through Newman tool.
 
 ## Status Check:
-Quick Ref:
 ```javascript
         pm.response.to.be.info - Checks 1XX status code
         pm.response.to.be.success - Checks 2XX status code
@@ -46,3 +45,4 @@ Quick Ref:
         pm.response.to.be.notFound - Status code of response is checked to be 404
         pm.response.to.be.rateLimited - Checks whether response status code is 429
 ```
+Ref:[Extended Checks](https://github.com/DannyDainton/All-Things-Postman/blob/master/Examples/08_extendingOurTests.md)
