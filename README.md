@@ -8,6 +8,7 @@ API Trsting using Postman
 - Customized Newman Reporter -[htmlextra](https://github.com/DannyDainton/newman-reporter-htmlextra)
 - Assertions using [Chai Assertion Library](https://www.chaijs.com/api/)
 
+Main Reference: [DannyDainton:All-Things-Postman](https://github.com/DannyDainton/All-Things-Postman#example-guides)
 
 ## Overview:
 The solution tests APIs from,
@@ -25,5 +26,5 @@ The solution tests APIs from,
 ## Execution Steps:
 1. Clone the repo.
 2. Import the collection and environment to postman tool.
-3. Run the tests from either Postman Collection Runner or through Newman tool
-4. Report is will get generated for the execution through Newman tool
+3. Run the tests from either Postman Collection Runner or through Newman tool.
+4. Report is will get generated for the execution through Newman tool.
