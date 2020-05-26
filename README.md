@@ -28,3 +28,19 @@ The solution tests APIs from,
 2. Import the collection and environment to postman tool.
 3. Run the tests from either Postman Collection Runner or through Newman tool.
 4. Report is will get generated for the execution through Newman tool.
+
+## Status Check:
+Quick Ref:
+        pm.response.to.be.info - Checks 1XX status code
+        pm.response.to.be.success - Checks 2XX status code
+        pm.response.to.be.redirection - Checks 3XX status code
+        pm.response.to.be.clientError - Checks 4XX status code
+        pm.response.to.be.serverError - Checks 5XX
+        pm.response.to.be.error - Checks 4XX or 5XX
+        pm.response.to.be.ok - Status code must be 200
+        pm.response.to.be.accepted - Status code must be 202
+        pm.response.to.be.badRequest - Status code must be 400
+        pm.response.to.be.unauthorized - Status code must be 401
+        pm.response.to.be.forbidden - Status code 403
+        pm.response.to.be.notFound - Status code of response is checked to be 404
+        pm.response.to.be.rateLimited - Checks whether response status code is 429
