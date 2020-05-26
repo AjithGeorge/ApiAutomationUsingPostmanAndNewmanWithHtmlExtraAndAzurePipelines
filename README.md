@@ -31,6 +31,7 @@ The solution tests APIs from,
 
 ## Status Check:
 Quick Ref:
+```javascript
         pm.response.to.be.info - Checks 1XX status code
         pm.response.to.be.success - Checks 2XX status code
         pm.response.to.be.redirection - Checks 3XX status code
@@ -44,3 +45,4 @@ Quick Ref:
         pm.response.to.be.forbidden - Status code 403
         pm.response.to.be.notFound - Status code of response is checked to be 404
         pm.response.to.be.rateLimited - Checks whether response status code is 429
+```
