@@ -49,8 +49,6 @@ Ref: [Extended Checks](https://github.com/DannyDainton/All-Things-Postman/blob/m
 
 ## Reuse Javascript code using Environment Variable
 Setting as environment variable:
-<br>
-Reference: [Postman Tips](https://blog.postman.com/api-testing-tips-from-a-postman-professional)
 ```javascript
 
 // Save common tests in a global variable
@@ -61,11 +59,9 @@ postman.setGlobalVariable("commonTests", () => {
 
   tests["Content-Type header is set"] = postman.getResponseHeader("Content-Type") === "application/json";
 
-
   // The response time must be less than 500 milliseconds
 
   tests["Response time is acceptable"] = responseTime < 500;
-
 
   // The response body must include an "id" property
 
@@ -78,11 +74,9 @@ postman.setGlobalVariable("commonTests", () => {
 Calling in Test/Pre-Script:
 ```javascript
 // First, run the common tests
-
 eval(globals.commonTests)();
 
-
 // Then run any request-specific tests
-
 tests["Status code is 200"] = responseCode.code === 200;
 ```
+Reference: [Postman Tips](https://blog.postman.com/api-testing-tips-from-a-postman-professional)
