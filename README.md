@@ -46,3 +46,41 @@ The solution tests APIs from,
         pm.response.to.be.rateLimited - Checks whether response status code is 429
 ```
 Ref: [Extended Checks](https://github.com/DannyDainton/All-Things-Postman/blob/master/Examples/08_extendingOurTests.md)
+
+## Reuse Javascript code using Environment Variable
+Setting as environment variable:
+```javascript
+
+// Save common tests in a global variable
+
+postman.setGlobalVariable("commonTests", () => {
+
+  // The Content-Type must be JSON
+
+  tests["Content-Type header is set"] = postman.getResponseHeader("Content-Type") === "application/json";
+
+
+  // The response time must be less than 500 milliseconds
+
+  tests["Response time is acceptable"] = responseTime < 500;
+
+
+  // The response body must include an "id" property
+
+  var data = JSON.parse(responseBody);
+
+  tests["Response has an ID"] = data.id !== undefined;
+
+});
+```
+Calling in Test/Pre-Script:
+```javascript
+// First, run the common tests
+
+eval(globals.commonTests)();
+
+
+// Then run any request-specific tests
+
+tests["Status code is 200"] = responseCode.code === 200;
+```
