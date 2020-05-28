@@ -49,6 +49,7 @@ Ref: [Extended Checks](https://github.com/DannyDainton/All-Things-Postman/blob/m
 
 ## Reuse Javascript code using Environment Variable
 Setting as environment variable:
+Reference: [Postman Tips](https://blog.postman.com/api-testing-tips-from-a-postman-professional)
 ```javascript
 
 // Save common tests in a global variable
