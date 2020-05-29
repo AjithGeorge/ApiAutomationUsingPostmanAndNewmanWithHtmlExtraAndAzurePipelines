@@ -122,6 +122,7 @@ var data = pm.response.json()
 pm.test('Check Schema from Environment Variable', function () {
     pm.expect(tv4.validate(data, (pm.environment.get("testSchema")))).to.be.true;});
 ```
+Note: The 'Required' field is mandatory else there won't be a strict match done for the field name.
 ## Branching and looping of Scripts
 Set the request to be executed next:
 
