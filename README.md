@@ -135,3 +135,5 @@ Stop workflow execution
 ```javascript
 postman.setNextRequest(null);
 ```
+postman.setNextRequest() is always executed at the end of the current request. This means that if you put this function before other code blocks anywhere in pre-request or test script, these blocks will still execute.
+<p>postman.setNextRequest() has a scope, which is the source of your collection run. If you run a collection, you can jump to any request in the collection (even requests inside folders, using the same syntax). However, if you run a folder, the scope of postman.setNextRequest() is limited to that folder. So you can jump to any request in this folder, but not ones that are outside of the folder. It includes requests inside other folders, and also root-level requests in the collection.</p>
