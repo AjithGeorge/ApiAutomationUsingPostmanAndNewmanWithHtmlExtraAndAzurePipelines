@@ -30,6 +30,8 @@ The solution tests APIs from,
 3. Run the tests from either Postman Collection Runner or through Newman tool.
 4. Use appropriate parameter for newman test execution to generate report.
 
+<p> Postman Sandbox [API reference](https://learning.postman.com/docs/postman/scripts/postman-sandbox-api-reference/)</p>
+        
 ## Status Check:
 ```javascript
         pm.response.to.be.info - Checks 1XX status code
