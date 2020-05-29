@@ -28,7 +28,7 @@ The solution tests APIs from,
 1. Clone the repo.
 2. Import the collection and environment to postman tool.
 3. Run the tests from either Postman Collection Runner or through Newman tool.
-4. Report is will get generated for the execution through Newman tool.
+4. Use appropriate parameter for newman test execution to generate report.
 
 ## Status Check:
 ```javascript
@@ -119,4 +119,19 @@ var data = pm.response.json()
 
 pm.test('Check Schema from Environment Variable', function () {
     pm.expect(tv4.validate(data, (pm.environment.get("testSchema")))).to.be.true;});
+```
+## Branching and looping of Scripts
+Set the request to be executed next:
+
+```javascript
+postman.setNextRequest("request_name");
+```
+Loop over the current request- use the same test in the setNextRequest() method. One should wrap setNextRequest in some logic so as to ensure that the request does not run indefinitely otherwise the collection runner would need to be force closed.
+
+<p>If postman.setNextRequest() is absent in a request, the collection runner defaults to linear execution and moves to the next request.</p>
+
+Stop workflow execution
+ 
+```javascript
+postman.setNextRequest(null);
 ```
