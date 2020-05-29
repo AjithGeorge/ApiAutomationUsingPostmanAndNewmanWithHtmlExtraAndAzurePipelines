@@ -80,3 +80,42 @@ eval(globals.commonTests)();
 tests["Status code is 200"] = responseCode.code === 200;
 ```
 Reference: [Postman Tips](https://blog.postman.com/api-testing-tips-from-a-postman-professional)
+
+## Schema as environment variable
+Setting as environment variable:
+```javascript 
+const schema = {
+    "required": [
+        "bookingid",
+        "booking"
+    ],
+    "properties": {
+        "bookingid": {
+            "type": "integer"
+        },
+        "booking": {
+            "type": "object",
+            "required": [
+                "firstname",
+                "lastname"
+            ],
+            "properties": {
+                "firstname": {
+                    "type": "string",
+                },
+                "lastname": {
+                    "type": "string",
+            }
+        }
+    }
+}
+
+pm.environment.set("testSchema",schema);; 
+```
+Comparing from environment variable:
+```javascript
+var data = pm.response.json()
+
+pm.test('Check Schema from Environment Variable', function () {
+    pm.expect(tv4.validate(data, (pm.environment.get("testSchema")))).to.be.true;});
+```
