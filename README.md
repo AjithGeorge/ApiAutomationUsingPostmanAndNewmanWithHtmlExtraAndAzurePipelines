@@ -48,8 +48,7 @@ Postman Sandbox [API reference](https://learning.postman.com/docs/postman/script
         pm.response.to.be.notFound - Status code of response is checked to be 404
         pm.response.to.be.rateLimited - Checks whether response status code is 429
 ```
-Ref: [Extended Checks](https://github.com/DannyDainton/All-Things-Postman/blob/master/Examples/08_extendingOurTests.md),  
-[Assertion Samples](https://learning.postman.com/docs/postman/scripts/test-examples/#assertion-library-examples)
+Ref: [Extended Checks](https://github.com/DannyDainton/All-Things-Postman/blob/master/Examples/08_extendingOurTests.md),[Assertion Samples](https://learning.postman.com/docs/postman/scripts/test-examples/#assertion-library-examples)
 
 ## Reuse Javascript code using Environment Variable
 Setting as environment variable:
