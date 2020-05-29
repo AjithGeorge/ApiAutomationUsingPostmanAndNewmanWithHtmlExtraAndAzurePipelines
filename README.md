@@ -4,6 +4,7 @@ API Testing using Postman
 
 ## Areas Covered:
 - Create API Tests Using [Postman Scripts](https://learning.postman.com/docs/postman/scripts/test-examples/)
+- Run tests using Postman Collection Runner and through [Newman](https://www.npmjs.com/package/newman) CLI tool
 - Generate Report using [Newman reporter](https://www.npmjs.com/package/newman-reporter-html)
 - Customized Newman Reporter -[htmlextra](https://github.com/DannyDainton/newman-reporter-htmlextra)
 - Assertions using [Chai Assertion Library](https://www.chaijs.com/api/)
