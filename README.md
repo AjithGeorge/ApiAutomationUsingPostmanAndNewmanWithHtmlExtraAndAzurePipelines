@@ -166,12 +166,13 @@ Instead of writing the same test script for different endpoints/ids the same tes
 
 Sample: Setting a function to a variable if not already present.
 ```javascript
-if (pm.variables.get("getId")===undefined) 
-{
-postman.setGlobalVariable("getId", () => {var baseUrl = pm.environment.get('baseURL');pm.sendRequest({    url: baseUrl + '/booking/',    method: 'GET'}, function (err, res) {    console.log(res);    pm.environment.set("id", res.json()[0].bookingid);});
-
-});}
+if(!pm.variables.has("variableName")){}
 ```
+
+```javascript
+if (pm.variables.get("variableName")===undefined){}
+```
+
 2. Have a folder for Health Check- to check the availability of the endpoint before commencing the remaining tests. There could be a logic added to prevent the execution of the remaining test if the endpoint is not alive.
 ```javascript
 if(!pm.response.to.be.success){
@@ -230,13 +231,6 @@ function cleanup() {
 }
 cleanup()
 ```
-5. Different ways for checking presence of an environment/global variable.
-```javascript
-if(!pm.variables.has("variableName")){}
-```
 
-```javascript
-if (pm.variables.get("variableName")===undefined){}
-```
 ## Sample Report
 <img src=https://github.com/AjithGeorge/API-Automation-Postman/blob/master/assets/Report-Sample.png>
