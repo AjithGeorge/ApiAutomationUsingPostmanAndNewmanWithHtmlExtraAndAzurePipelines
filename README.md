@@ -162,7 +162,7 @@ Instead of writing the same test script for different endpoints/ids the same tes
 
 
 ## Tips#
-1. Have a folder Pre-Condition/Pre-Requisites which will check for the required variables in the environment and if NOT will create them, thereby reducing the chance of error.
+1. Have a folder Pre-Condition/Pre-Requisites which will check for the required variables in the environment/global space and if NOT will create them, thereby reducing the chance of error.
 
 Sample: Setting a function to a variable if not already present.
 ```javascript
