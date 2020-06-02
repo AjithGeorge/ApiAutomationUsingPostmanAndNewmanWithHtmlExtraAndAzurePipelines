@@ -182,6 +182,8 @@ if(!pm.response.to.be.success){
     postman.setNextRequest(null);
 }
 ```
+<img src=https://github.com/AjithGeorge/API-Automation-Postman/blob/master/assets/Health%20Check.png>
+
 ### 3. Integer validation:
 To compare int values don't forget to do implicit conversion if the retrieved value is from any environment/global variable.
 Postman stores all variables in string format only.
