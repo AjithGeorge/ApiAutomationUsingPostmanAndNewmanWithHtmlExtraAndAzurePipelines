@@ -129,7 +129,7 @@ Instead of hardcoding the resource url (like in case of id) use dynamic linking 
 - Send a reuest in the pre-script to fetch in the list of resources ids.
 - Select a random id from the list (enusre random selection to prevent the selection of the same id every run -displayed script doesn't randomize as the api return was inturn not in a particular set format)
 - Set the same as an environment/global variable and consume in the API method.
-[[https://github.com/AjithGeorge/API-Automation-Postman/blob/master/assets/Dynamic%20Id.png]]
+<img src=https://github.com/AjithGeorge/API-Automation-Postman/blob/master/assets/Dynamic%20Id.png>
 
 ## Branching and looping of Scripts
 Set the request to be executed next:
