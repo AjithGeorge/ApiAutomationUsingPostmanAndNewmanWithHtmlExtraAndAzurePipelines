@@ -174,6 +174,8 @@ function cleanup() {
     pm.globals.unset("arrayLength");
     pm.globals.unset("bookingIds");
 }
+
+cleanup()
 ```
 - Can remove/unset the varibales based on a preset prefix.
 ```javascript
