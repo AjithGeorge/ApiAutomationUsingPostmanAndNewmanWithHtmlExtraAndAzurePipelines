@@ -123,6 +123,13 @@ pm.test('Check Schema from Environment Variable', function () {
     pm.expect(tv4.validate(data, (pm.environment.get("testSchema")))).to.be.true;});
 ```
 Note: The 'Required' field is mandatory else there won't be a strict match done for the field name.
+
+## Dynamic resource/data linking
+Instead of hardcodig the resource url (like in case of id) use dynamic linking of the same to reduce error.
+- Send a reuest in the pre-script to fetch in the list of resources ids.
+- Select a random id from the list (enusre random selection to prevent the selection of the same id every run -displayed script doesn't randomize as the api return was inturn not in a particular set format)
+- Set the same as an environment/global variable and consume in the API method.
+
 ## Branching and looping of Scripts
 Set the request to be executed next:
 
