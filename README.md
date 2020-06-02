@@ -152,5 +152,12 @@ postman.setGlobalVariable("getId", () => {var baseUrl = pm.environment.get('base
 
 });}
 ```
+2. Have a folder for Health Check- to check the availability of the endpoint before commencing the remaining tests. There could be a logic added to prevent the execution of the remaining test if the endpoint is not alive.
+```javascript
+if(!pm.response.to.be.success){
+
+    postman.setNextRequest(null);
+}
+```
 
 
