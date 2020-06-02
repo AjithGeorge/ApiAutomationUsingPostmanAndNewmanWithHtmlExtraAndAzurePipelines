@@ -238,4 +238,5 @@ if(!pm.variables.has("variableName")){}
 ```javascript
 if (pm.variables.get("variableName")===undefined){}
 ```
-##Sample Report
+## Sample Report
+<img src=https://github.com/AjithGeorge/API-Automation-Postman/blob/master/assets/Report-Sample.png>
