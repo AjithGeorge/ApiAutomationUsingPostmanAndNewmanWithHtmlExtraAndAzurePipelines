@@ -167,5 +167,34 @@ pm.test("15 should equal 15", () => pm.expect(15).to.equal(parseInt(pm.globals.g
 ```
 4. Different teardown approaches: 
 - Can specifically remove/unset the variables after the test.
+```javascript
+function cleanup() {
+    pm.environment.unset("id");
+    pm.globals.unset("counter");
+    pm.globals.unset("arrayLength");
+    pm.globals.unset("bookingIds");
+}
+```
 - Can remove/unset the varibales based on a preset prefix.
+```javascript
+function cleanup() {
+
+    const clean = _.keys(pm.environment.toObject())
+
+    _.each(clean, (arrItem) => {
+
+        if (arrItem.startsWith("test")) {
+
+            pm.environment.unset(arrItem)
+
+        }
+    })
+
+}
+
+cleanup()
+```
 - Can remove an entire type of variables. Approach uses variables that are to be retained as one type(say global) and the others as a different type (say environment).
+```javascript
+pm.globals.clear(); // This will remove all globals, use with caution.
+```
