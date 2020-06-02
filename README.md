@@ -220,6 +220,16 @@ cleanup()
 ```javascript
 pm.globals.clear(); // This will remove all globals, use with caution.
 ```
+- Remove items using a pre-defined array of variables
+```javascript
+function cleanup() {
+    const clean = ['first_name', 'last_name', 'total_price', 'depositPaid', 'check_in', 'check_out', 'additional_needs']
+    for(let i = 0; i < clean.length; ++i){
+        pm.environment.unset(clean[i])
+    }
+}
+cleanup()
+```
 5. Different ways for checking presence of an environment/global variable.
 ```javascript
 if(!pm.variables.has("variableName")){}
@@ -228,3 +238,4 @@ if(!pm.variables.has("variableName")){}
 ```javascript
 if (pm.variables.get("variableName")===undefined){}
 ```
+##Sample Report
