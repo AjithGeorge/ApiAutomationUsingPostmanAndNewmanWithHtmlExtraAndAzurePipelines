@@ -1,12 +1,6 @@
 {
 	"id": "58413264-0224-4c44-8d15-4040765a301c",
 	"values": [
-
-		{
-			"key": "another_global_number",
-			"value": "",
-			"enabled": false
-		},
 		{
 			"key": "getId",
 			"value": "",
@@ -20,6 +14,6 @@
 	],
 	"name": "My Workspace Globals",
 	"_postman_variable_scope": "globals",
-	"_postman_exported_at": "2020-06-02T11:24:25.428Z",
+	"_postman_exported_at": "2020-06-02T11:35:09.007Z",
 	"_postman_exported_using": "Postman/7.25.0"
 }
