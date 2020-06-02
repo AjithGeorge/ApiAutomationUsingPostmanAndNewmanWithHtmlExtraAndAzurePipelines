@@ -125,7 +125,7 @@ pm.test('Check Schema from Environment Variable', function () {
 Note: The 'Required' field is mandatory else there won't be a strict match done for the field name.
 
 ## Dynamic resource/data linking
-Instead of hardcodig the resource url (like in case of id) use dynamic linking of the same to reduce error.
+Instead of hardcoding the resource url (like in case of id) use dynamic linking of the same to reduce error.
 - Send a reuest in the pre-script to fetch in the list of resources ids.
 - Select a random id from the list (enusre random selection to prevent the selection of the same id every run -displayed script doesn't randomize as the api return was inturn not in a particular set format)
 - Set the same as an environment/global variable and consume in the API method.
@@ -147,6 +147,10 @@ postman.setNextRequest(null);
 ```
 postman.setNextRequest() is always executed at the end of the current request. This means that if you put this function before other code blocks anywhere in pre-request or test script, these blocks will still execute.
 <p>postman.setNextRequest() has a scope, which is the source of your collection run. If you run a collection, you can jump to any request in the collection (even requests inside folders, using the same syntax). However, if you run a folder, the scope of postman.setNextRequest() is limited to that folder. So you can jump to any request in this folder, but not ones that are outside of the folder. It includes requests inside other folders, and also root-level requests in the collection.</p>
+
+## Single test to iterate over a set of data
+Instead of writing the same test script for different endpoints/ids the same test could be used to iterate over the data without any repetition of the code. (DRY -Don't Repeat Your code)
+
 
 ## Tips#
 1. Have a folder Pre-Condition/Pre-Requisites which will check for the required variables in the environment and if NOT will create them, thereby reducing the chance of error.
