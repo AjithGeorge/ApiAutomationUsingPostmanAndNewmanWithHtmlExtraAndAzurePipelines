@@ -159,5 +159,13 @@ if(!pm.response.to.be.success){
     postman.setNextRequest(null);
 }
 ```
+3. To compare int values don't forget to do implicit conversion if the retrieved value is from any environment/global variable.
+Postman stores all variables in string format only.
 
-
+```javascript
+pm.test("15 should equal 15", () => pm.expect(15).to.equal(parseInt(pm.globals.get('another_global_number'))))
+```
+4. Different teardown approaches: 
+- Can specifically remove/unset the variables after the test.
+- Can remove/unset the varibales based on a preset prefix.
+- Can remove an entire type of variables. Approach uses variables that are to be retained as one type(say global) and the others as a different type (say environment).
