@@ -140,3 +140,17 @@ postman.setNextRequest(null);
 ```
 postman.setNextRequest() is always executed at the end of the current request. This means that if you put this function before other code blocks anywhere in pre-request or test script, these blocks will still execute.
 <p>postman.setNextRequest() has a scope, which is the source of your collection run. If you run a collection, you can jump to any request in the collection (even requests inside folders, using the same syntax). However, if you run a folder, the scope of postman.setNextRequest() is limited to that folder. So you can jump to any request in this folder, but not ones that are outside of the folder. It includes requests inside other folders, and also root-level requests in the collection.</p>
+
+## Tips#
+1. Have a folder Pre-Condition/Pre-Requisites which will check for the required variables in the environment and if NOT will create them, thereby reducing the chance of error.
+
+Sample: Setting a function to a variable if not already present.
+```javascript
+if (pm.variables.get("getId")===undefined) 
+{
+postman.setGlobalVariable("getId", () => {var baseUrl = pm.environment.get('baseURL');pm.sendRequest({    url: baseUrl + '/booking/',    method: 'GET'}, function (err, res) {    console.log(res);    pm.environment.set("id", res.json()[0].bookingid);});
+
+});}
+```
+
+
