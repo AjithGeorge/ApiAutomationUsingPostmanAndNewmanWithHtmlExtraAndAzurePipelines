@@ -162,7 +162,8 @@ Instead of writing the same test script for different endpoints/ids the same tes
 
 
 ## Tips#
-1. Have a folder Pre-Condition/Pre-Requisites which will check for the required variables in the environment/global space and if NOT will create them, thereby reducing the chance of error.
+### 1. Check presence of variables:
+Have a folder Pre-Condition/Pre-Requisites which will check for the required variables in the environment/global space and if NOT will create them, thereby reducing the chance of error.
 
 Sample: Setting a function to a variable if not already present.
 ```javascript
@@ -173,20 +174,23 @@ if(!pm.variables.has("variableName")){}
 if (pm.variables.get("variableName")===undefined){}
 ```
 
-2. Have a folder for Health Check- to check the availability of the endpoint before commencing the remaining tests. There could be a logic added to prevent the execution of the remaining test if the endpoint is not alive.
+### 2. Endpoint availabiltiy check:
+Have a folder for Health Check- to check the availability of the endpoint before commencing the remaining tests. There could be a logic added to prevent the execution of the remaining test if the endpoint is not alive.
 ```javascript
 if(!pm.response.to.be.success){
 
     postman.setNextRequest(null);
 }
 ```
-3. To compare int values don't forget to do implicit conversion if the retrieved value is from any environment/global variable.
+### 3. Integer validation:
+To compare int values don't forget to do implicit conversion if the retrieved value is from any environment/global variable.
 Postman stores all variables in string format only.
 
 ```javascript
 pm.test("15 should equal 15", () => pm.expect(15).to.equal(parseInt(pm.globals.get('another_global_number'))))
 ```
-4. Different teardown approaches: 
+### 4. CleanUp methods:
+Different teardown approaches: 
 - Can specifically remove/unset the variables after the test.
 ```javascript
 function cleanup() {
