@@ -1,11 +1,7 @@
 {
 	"id": "58413264-0224-4c44-8d15-4040765a301c",
 	"values": [
-		{
-			"key": "user_key",
-			"value": "PMAK-5ec624111d393e0042462a7a-1731fb3649f396d164abdbe4bf35d77798",
-			"enabled": false
-		},
+
 		{
 			"key": "another_global_number",
 			"value": "",
