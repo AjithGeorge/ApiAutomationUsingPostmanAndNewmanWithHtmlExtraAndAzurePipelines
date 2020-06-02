@@ -220,3 +220,11 @@ cleanup()
 ```javascript
 pm.globals.clear(); // This will remove all globals, use with caution.
 ```
+5. Different ways for checking presence of an environment/global variable.
+```javascript
+if(!pm.variables.has("variableName")){}
+```
+
+```javascript
+if (pm.variables.get("variableName")===undefined){}
+```
