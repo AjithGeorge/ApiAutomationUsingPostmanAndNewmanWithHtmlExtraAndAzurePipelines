@@ -6,6 +6,84 @@
 	},
 	"item": [
 		{
+			"name": "Pre-Requisites",
+			"item": [
+				{
+					"name": "Add Global Variables",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "407125de-f31a-4031-b77a-bca81ec969ec",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "bfd4702b-24fd-4983-bed1-deaa39efdf22",
+								"exec": [
+									"// Save common tests in a variable\r",
+									"\r",
+									"if (pm.variables.get(\"getId\")===undefined) \r",
+									"{\r",
+									"postman.setGlobalVariable(\"getId\", () => {var baseUrl = pm.environment.get('baseURL');pm.sendRequest({    url: baseUrl + '/booking/',    method: 'GET'}, function (err, res) {    console.log(res);    pm.environment.set(\"id\", res.json()[0].bookingid);});\r",
+									"\r",
+									"});}\r",
+									"\r",
+									"if (pm.variables.get(\"cleanup\")===undefined) {\r",
+									"\r",
+									"postman.setGlobalVariable(\"cleanup\", () => {\r",
+									" function cleanup() {\r",
+									"\r",
+									"     const clean = _.keys(pm.environment.toObject())\r",
+									"\r",
+									"     _.each(clean, (arrItem) => {\r",
+									"\r",
+									"         if (arrItem.startsWith(\"test\")) {\r",
+									"\r",
+									"             pm.environment.unset(arrItem)\r",
+									"\r",
+									"         }\r",
+									"     })\r",
+									"\r",
+									" }\r",
+									"\r",
+									" cleanup()});}\r",
+									"\r",
+									" \r",
+									"pm.test(\"Add required variables\", function () {\r",
+									"    pm.response.to.be.success\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/ping",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Will check for the global variables and if not available will create the same",
+			"protocolProfileBehavior": {}
+		},
+		{
 			"name": "Health Check",
 			"item": [
 				{
@@ -23,7 +101,12 @@
 									"    pm.response.to.be.success;",
 									"});",
 									"",
-									"pm.test('Content-Type header is correct', () => pm.response.to.have.header('Content-Type', 'text/plain; charset=utf-8'))"
+									"pm.test('Content-Type header is correct', () => pm.response.to.have.header('Content-Type', 'text/plain; charset=utf-8'))",
+									"",
+									"if(!pm.response.to.be.success){",
+									"",
+									"    postman.setNextRequest(null);",
+									"}"
 								],
 								"type": "text/javascript"
 							}
@@ -125,7 +208,7 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Get all Bookings",
+			"name": "Get all bookings",
 			"item": [
 				{
 					"name": "Get all bookings:Test Performance",
@@ -165,10 +248,11 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
+								"id": "4025d692-2c9f-4302-8847-30de479fe19c",
 								"exec": [
 									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200))"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -176,7 +260,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/booking?firstname=sally&lastname=brown&checkin=2017-11-11&checkout=2017-11-15",
+							"raw": "{{baseURL}}/booking?firstname=Sally&lastname=Brown&checkin=\"2013-02-23\"&checkout=2014-10-23",
 							"host": [
 								"{{baseURL}}"
 							],
@@ -186,19 +270,19 @@
 							"query": [
 								{
 									"key": "firstname",
-									"value": "sally"
+									"value": "Sally"
 								},
 								{
 									"key": "lastname",
-									"value": "brown"
+									"value": "Brown"
 								},
 								{
 									"key": "checkin",
-									"value": "2017-11-11"
+									"value": "\"2013-02-23\""
 								},
 								{
 									"key": "checkout",
-									"value": "2017-11-15"
+									"value": "2014-10-23"
 								}
 							]
 						}
@@ -225,7 +309,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/booking?firstname=sally&lastname=brown",
+							"raw": "{{baseURL}}/booking?firstname=Sally&lastname=Brown",
 							"host": [
 								"{{baseURL}}"
 							],
@@ -235,11 +319,11 @@
 							"query": [
 								{
 									"key": "firstname",
-									"value": "sally"
+									"value": "Sally"
 								},
 								{
 									"key": "lastname",
-									"value": "brown"
+									"value": "Brown"
 								}
 							]
 						}
@@ -288,10 +372,11 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
+								"id": "2ee1372c-b825-403c-a5e6-bb825c4a1fa7",
 								"exec": [
 									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200))"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -299,7 +384,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/booking?lastname=brown",
+							"raw": "{{baseURL}}/booking?lastname=Brown",
 							"host": [
 								"{{baseURL}}"
 							],
@@ -309,7 +394,7 @@
 							"query": [
 								{
 									"key": "lastname",
-									"value": "brown"
+									"value": "Brown"
 								}
 							]
 						}
@@ -414,7 +499,7 @@
 									"    pm.expect(jsonData.bookingdates.checkout).to.match(/^\\d{4}-\\d{2}-\\d{2}$/)",
 									"});",
 									"",
-									"if (pm.response.json().additionalneeds === undefined){",
+									"if (pm.response.json().additionalneeds === undefined) {",
 									"    pm.test.skip(\"Customer has no additional needs\", () => {",
 									"        return",
 									"    })",
@@ -422,7 +507,37 @@
 									"    pm.test(\"Customer has additional needs\", () => {",
 									"        pm.expect(pm.response.json().additionalneeds).to.be.a('string')",
 									"    })",
-									"}"
+									"}",
+									"",
+									"function cleanup() {",
+									"    pm.environment.unset(\"id\");",
+									"}",
+									"",
+									"cleanup()"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "7229fe53-2ecd-43bc-a9e0-f79a65c123a5",
+								"exec": [
+									"eval(globals.getId)();\r",
+									"\r",
+									"// Calling the same script from environmwnt variable\r",
+									"\r",
+									"// var baseUrl = pm.environment.get('baseURL');\r",
+									"// console.log(baseUrl);\r",
+									"// pm.sendRequest({\r",
+									"//     url: baseUrl + '/booking/',\r",
+									"//     method: 'GET'\r",
+									"// }, function (err, res) {\r",
+									"//     console.log(res);\r",
+									"//     pm.environment.set(\"id\", res.json()[0].bookingid);\r",
+									"// });\r",
+									"\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -437,13 +552,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}/booking/1",
+							"raw": "{{baseURL}}/booking/{{id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"booking",
-								"1"
+								"{{id}}"
 							]
 						}
 					},
@@ -478,22 +593,27 @@
 									"        pm.expect(pm.response.json().additionalneeds).to.be.a('string')",
 									"    })",
 									"}",
-									"function cleanup() {",
 									"",
-									"    const clean = _.keys(pm.environment.toObject())",
+									"eval(globals.cleanup)();",
 									"",
-									"    _.each(clean, (arrItem) => {",
+									"//Using function from environment variable to replace the commented line of codes.",
 									"",
-									"        if (arrItem.startsWith(\"test\")) {",
+									"// function cleanup() {",
 									"",
-									"            pm.environment.unset(arrItem)",
+									"//     const clean = _.keys(pm.environment.toObject())",
 									"",
-									"        }",
-									"    })",
+									"//     _.each(clean, (arrItem) => {",
 									"",
-									"}",
+									"//         if (arrItem.startsWith(\"test\")) {",
 									"",
-									"cleanup()",
+									"//             pm.environment.unset(arrItem)",
+									"",
+									"//         }",
+									"//     })",
+									"",
+									"// }",
+									"",
+									"// cleanup()",
 									"",
 									""
 								],
@@ -514,20 +634,23 @@
 									"}, function (err, res) {\r",
 									"    console.log(res);\r",
 									"    pm.environment.set(\"id\", res.json()[0].bookingid);\r",
-									"    id= res.json()[0].bookingid;\r",
+									"      id = res.json()[0].bookingid;\r",
 									"\r",
-									"pm.sendRequest({\r",
-									"    url: baseUrl + '/booking/'+id,\r",
-									"    method: 'GET'\r",
+									"    //  pm.environment.replaceIn(id); // can be used to set the and retrieve the env variable realtime\r",
+									"    //  id=pm.environment.get(\"id\");\r",
+									"\r",
+									"    pm.sendRequest({\r",
+									"        url: baseUrl + '/booking/' + id,\r",
+									"        method: 'GET'\r",
 									"    },\r",
-									"    function (err, res) {\r",
-									"    console.log(res.json());\r",
-									"    pm.environment.set(\"test_firstname\", res.json().firstname);\r",
-									"    pm.environment.set(\"test_lastname\", res.json().lastname);\r",
-									"    pm.environment.set(\"test_totalprice\", res.json().totalprice);\r",
-									"    pm.environment.set(\"test_depositpaid\", res.json().depositpaid);\r",
+									"        function (err, res) {\r",
+									"            console.log(res.json());\r",
+									"            pm.environment.set(\"test_firstname\", res.json().firstname);\r",
+									"            pm.environment.set(\"test_lastname\", res.json().lastname);\r",
+									"            pm.environment.set(\"test_totalprice\", res.json().totalprice);\r",
+									"            pm.environment.set(\"test_depositpaid\", res.json().depositpaid);\r",
 									"\r",
-									"});\r",
+									"        });\r",
 									"\r",
 									"});\r",
 									"\r",
@@ -588,15 +711,7 @@
 							"script": {
 								"id": "53f4a6bd-aff7-429d-b4e6-468477232054",
 								"exec": [
-									"var baseUrl = pm.environment.get('baseURL');\r",
-									"console.log(baseUrl);\r",
-									"pm.sendRequest({\r",
-									"    url: baseUrl + '/booking/',\r",
-									"    method: 'GET'\r",
-									"}, function (err, res) {\r",
-									"    console.log(res);\r",
-									"    pm.environment.set(\"id\", res.json()[0].bookingid);\r",
-									"});\r",
+									"eval(globals.getId)();\r",
 									""
 								],
 								"type": "text/javascript"
@@ -630,10 +745,21 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
+								"id": "f7792787-0c5e-4426-b473-60cf1bc1ca8e",
 								"exec": [
 									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200))"
-								]
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "810de2a9-0aa0-4cb1-8599-171b372f5f96",
+								"exec": [
+									"eval(globals.getId)();"
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -646,13 +772,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}/booking/1",
+							"raw": "{{baseURL}}/booking/{{id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"booking",
-								"1"
+								"{{id}}"
 							]
 						}
 					},
@@ -666,7 +792,7 @@
 							"script": {
 								"id": "87aa1fc1-66cf-4596-bb6e-ec84494274bd",
 								"exec": [
-									"pm.environment.set(\"booking_id\", _.random(1,10))",
+									"pm.environment.set(\"booking_id\", _.random(1, 7))",
 									"pm.globals.set('another_global_number', 15)",
 									""
 								],
@@ -765,7 +891,62 @@
 							"script": {
 								"id": "eeb0b51e-2c47-4271-8399-7fd1cd934d72",
 								"exec": [
-									""
+									"const schema = {\r",
+									"    \"required\": [\r",
+									"        \"bookingid\",\r",
+									"        \"booking\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"bookingid\": {\r",
+									"            \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"booking\": {\r",
+									"            \"type\": \"object\",\r",
+									"            \"required\": [\r",
+									"                \"firstname\",\r",
+									"                \"lastname\",\r",
+									"                \"totalprice\",\r",
+									"                \"depositpaid\",\r",
+									"                \"bookingdates\",\r",
+									"                \"additionalneeds\"\r",
+									"            ],\r",
+									"            \"properties\": {\r",
+									"                \"firstname\": {\r",
+									"                    \"type\": \"string\",\r",
+									"                },\r",
+									"                \"lastname\": {\r",
+									"                    \"type\": \"string\",\r",
+									"                },\r",
+									"                \"totalprice\": {\r",
+									"                    \"type\": \"integer\"\r",
+									"                },\r",
+									"                \"depositpaid\": {\r",
+									"                    \"type\": \"boolean\",\r",
+									"                },\r",
+									"                \"bookingdates\": {\r",
+									"                    \"type\": \"object\",\r",
+									"                    \"required\": [\r",
+									"                        \"checkin\",\r",
+									"                        \"checkout\"\r",
+									"                    ],\r",
+									"                    \"properties\": {\r",
+									"                        \"checkin\": {\r",
+									"                            \"type\": \"string\",\r",
+									"                        },\r",
+									"                        \"checkout\": {\r",
+									"                            \"type\": \"string\",\r",
+									"                        }\r",
+									"                    }\r",
+									"                },\r",
+									"                \"additionalneeds\": {\r",
+									"                    \"type\": [\"string\", \"null\"],\r",
+									"                }\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"testSchema\",schema);;"
 								],
 								"type": "text/javascript"
 							}
@@ -825,17 +1006,23 @@
 									"                    }",
 									"                },",
 									"                \"additionalneeds\": {",
-									"                    \"type\": [\"string\",\"null\"],",
+									"                    \"type\": [\"string\", \"null\"],",
 									"                }",
 									"            }",
 									"        }",
 									"    }",
 									"}",
-									"var data1 =pm.response.json()",
+									"var data = pm.response.json()",
 									"",
-									"pm.test('Schema is valid', function() {",
-									"  pm.expect(tv4.validate(data1, schema)).to.be.true;",
+									"pm.test('Schema is valid', function () {",
+									"    pm.expect(tv4.validate(data, schema)).to.be.true;",
 									"});",
+									"",
+									"pm.test('Check Schema from Environment Variable', function () {",
+									"    pm.expect(tv4.validate(data, (pm.environment.get(\"testSchema\")))).to.be.true;",
+									"});",
+									"",
+									"",
 									""
 								],
 								"type": "text/javascript"
@@ -852,7 +1039,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"firstname\" : \"Sally\",\r\n\t\"lastname\" : \"Brown\",\r\n\t\"totalprice\" : 111,\r\n\t\"depositpaid\" : true,\r\n\t\"additionalneeds\" : \"Breakfast\",\r\n\t\"bookingdates\" : {\r\n\t\t\"checkin\" : \"2013-02-23\",\r\n\t\t\"checkout\" : \"2014-10-23\"\r\n\t}\r\n}"
+							"raw": "{\r\n  \"firstname\" : \"Sally\",\r\n\t\"lastname\" : \"Brown\",\r\n\t\"totalprice\" : 111,\r\n\t\"depositpaid\" : true,\r\n\t\"additionalneeds\" : \"Breakfast\",\r\n\t\"bookingdates\" : {\r\n\t\t\"checkin\" : \"2017-11-11\",\r\n\t\t\"checkout\" : \"2017-11-15\"\r\n\t}\r\n}"
 						},
 						"url": {
 							"raw": "{{baseURL}}/booking",
@@ -1032,22 +1219,26 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200))",
 									"",
-									"function cleanup() {",
+									"eval(globals.cleanup)();",
 									"",
-									"    const clean = _.keys(pm.environment.toObject())",
+									"//Using function from environment variable to replace the commented line of codes.",
 									"",
-									"    _.each(clean, (arrItem) => {",
+									"// function cleanup() {",
 									"",
-									"        if (arrItem.startsWith(\"test\")) {",
+									"//     const clean = _.keys(pm.environment.toObject())",
 									"",
-									"            pm.environment.unset(arrItem)",
+									"//     _.each(clean, (arrItem) => {",
 									"",
-									"        }",
-									"    })",
+									"//         if (arrItem.startsWith(\"test\")) {",
 									"",
-									"}",
+									"//             pm.environment.unset(arrItem)",
 									"",
-									"cleanup()",
+									"//         }",
+									"//     })",
+									"",
+									"// }",
+									"",
+									"// cleanup()",
 									"",
 									""
 								],
@@ -1087,7 +1278,7 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Update Booking",
+			"name": "Update booking",
 			"item": [
 				{
 					"name": "Full Update: Test data update",
@@ -1097,15 +1288,21 @@
 							"script": {
 								"id": "3dca09f3-d88f-40bf-b904-af7450b2cfef",
 								"exec": [
-									"var baseUrl = pm.environment.get('baseURL');\r",
-									"console.log(baseUrl);\r",
-									"pm.sendRequest({\r",
-									"    url: baseUrl + '/booking/',\r",
-									"    method: 'GET'\r",
-									"}, function (err, res) {\r",
-									"    console.log(res);\r",
-									"    pm.environment.set(\"id\", res.json()[0].bookingid);\r",
-									"});\r",
+									"//Using the function from environment variable to replace the commented line of codes.\r",
+									"\r",
+									"// var baseUrl = pm.environment.get('baseURL');\r",
+									"// console.log(baseUrl);\r",
+									"// pm.sendRequest({\r",
+									"//     url: baseUrl + '/booking/',\r",
+									"//     method: 'GET'\r",
+									"// }, function (err, res) {\r",
+									"//     console.log(res);\r",
+									"//     pm.environment.set(\"id\", res.json()[0].bookingid);\r",
+									"// });\r",
+									"\r",
+									"\r",
+									"// Run the Script form Global Variable\r",
+									"eval(globals.getId)();\r",
 									""
 								],
 								"type": "text/javascript"
@@ -1137,6 +1334,7 @@
 									"        pm.expect(pm.response.json().additionalneeds).to.be.a('string')\r",
 									"    })\r",
 									"}\r",
+									"\r",
 									"function cleanup() {\r",
 									"    pm.environment.unset(\"id\");\r",
 									"}\r",
@@ -1210,7 +1408,7 @@
 								"id": "3dd94fb3-3153-4550-84ae-7a56ff63e927",
 								"exec": [
 									"var baseUrl = pm.environment.get('baseURL');\r",
-									"console.log(baseUrl);\r",
+									"\r",
 									"pm.sendRequest({\r",
 									"    url: baseUrl + '/booking/',\r",
 									"    method: 'GET'\r",
@@ -1218,7 +1416,7 @@
 									"    console.log(res);\r",
 									"    pm.environment.set(\"id\", res.json()[0].bookingid);\r",
 									"\r",
-									"  id = res.json()[0].bookingid;\r",
+									"    id = res.json()[0].bookingid;\r",
 									"\r",
 									"    pm.sendRequest({\r",
 									"        url: baseUrl + '/booking/' + id,\r",
@@ -1256,24 +1454,24 @@
 									"    pm.expect(jsonData.depositpaid).to.equal(pm.environment.get('test_depositpaid'))\r",
 									"});\r",
 									"\r",
+									"//Using function from environment variable to replace the commented line of codes.\r",
 									"\r",
-									"function cleanup() {\r",
-									"    pm.environment.unset(\"id\");\r",
-									"        const clean = _.keys(pm.environment.toObject())\r",
+									"// function cleanup() {\r",
+									"//     pm.environment.unset(\"id\");\r",
+									"//     const clean = _.keys(pm.environment.toObject())\r",
 									"\r",
-									"    _.each(clean, (arrItem) => {\r",
+									"//     _.each(clean, (arrItem) => {\r",
 									"\r",
-									"        if (arrItem.startsWith(\"test\")) {\r",
+									"//         if (arrItem.startsWith(\"test\")) {\r",
 									"\r",
-									"            pm.environment.unset(arrItem)\r",
+									"//             pm.environment.unset(arrItem)\r",
+									"//         }\r",
+									"//     })\r",
+									"// }\r",
 									"\r",
-									"        }\r",
-									"    })\r",
-									"}\r",
+									"// cleanup()\r",
 									"\r",
-									"cleanup()\r",
-									"\r",
-									""
+									"eval(globals.cleanup)();"
 								],
 								"type": "text/javascript"
 							}
@@ -1332,10 +1530,47 @@
 					"response": []
 				}
 			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "password123",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "admin",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "803de527-ee46-40bf-a7eb-58556c4b39e3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad3acd85-b971-4ab8-adbd-2c20fcf72cf0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Delete Booking",
+			"name": "Delete booking",
 			"item": [
 				{
 					"name": "Delete Booking: Through Cookie Auth:Test Pre-Req Script",
@@ -1364,8 +1599,10 @@
 								"exec": [
 									"var baseUrl = pm.environment.get('baseURL');",
 									"",
+									"if (pm.variables.get(\"token\")===undefined) {",
+									"",
 									"pm.sendRequest({",
-									"    url: baseUrl+'/auth',",
+									"    url: baseUrl + '/auth',",
 									"    method: 'POST',",
 									"    header: 'Content-Type:application/json',",
 									"    body: {",
@@ -1376,15 +1613,19 @@
 									"    console.log(res);",
 									"    pm.environment.set(\"token\", res.json().token);",
 									"});",
+									"}",
 									"",
-									"pm.sendRequest({",
-									"    url: baseUrl+'/booking/',",
-									"    method: 'GET'",
-									"}, function (err, res) {",
-									"    console.log(res);",
-									"    pm.environment.set(\"id\", res.json()[0].bookingid);",
+									"//Using the function from environment variable to replace the commented line of codes.",
 									"",
-									"});"
+									"// pm.sendRequest({",
+									"//     url: baseUrl + '/booking/',",
+									"//     method: 'GET'",
+									"// }, function (err, res) {",
+									"//     console.log(res);",
+									"//     pm.environment.set(\"id\", res.json()[0].bookingid);",
+									"// });",
+									"",
+									"eval(globals.getId)();"
 								],
 								"type": "text/javascript"
 							}
@@ -1442,16 +1683,20 @@
 							"script": {
 								"id": "d2b2fab7-eda3-4cd8-a12e-b5e758d19edd",
 								"exec": [
-									"var baseUrl = pm.environment.get('baseURL');",
-									"console.log(baseUrl);",
-									"pm.sendRequest({",
-									"    url: baseUrl+'/booking/',",
-									"    method: 'GET'",
-									"}, function (err, res) {",
-									"    console.log(res);",
-									"    pm.environment.set(\"id\", res.json()[0].bookingid);",
+									"//Using the function from environment variable to replace the commented line of codes.",
 									"",
-									"});"
+									"",
+									"// var baseUrl = pm.environment.get('baseURL');",
+									"// console.log(baseUrl);",
+									"// pm.sendRequest({",
+									"//     url: baseUrl + '/booking/',",
+									"//     method: 'GET'",
+									"// }, function (err, res) {",
+									"//     console.log(res);",
+									"//     pm.environment.set(\"id\", res.json()[0].bookingid);",
+									"// });",
+									"",
+									"eval(globals.getId)();"
 								],
 								"type": "text/javascript"
 							}
@@ -1487,6 +1732,126 @@
 								"type": "text"
 							}
 						],
+						"url": {
+							"raw": "{{baseURL}}/booking/{{id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"booking",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get all bookings - Loop",
+			"item": [
+				{
+					"name": "Get Single Booking",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a5a79ca3-804c-417a-b056-772694b00a55",
+								"exec": [
+									" var baseUrl = pm.environment.get('baseURL');\r",
+									" console.log(baseUrl);\r",
+									" pm.sendRequest({\r",
+									"     url: baseUrl + '/booking/',\r",
+									"     method: 'GET'\r",
+									" }, function (err, res) {\r",
+									"     console.log(res);\r",
+									"    \r",
+									"    if (!pm.variables.has(\"bookingIds\")) {\r",
+									"     \r",
+									"     var _bookings = []\r",
+									"\r",
+									"         for(var i = 0; i < res.json().length; i++) {\r",
+									"             var obj = res.json()[i];\r",
+									"             _bookings.push(obj.bookingid); \r",
+									"         }\r",
+									"     console.log(_bookings);\r",
+									"     pm.globals.set(\"bookingIds\", _bookings);\r",
+									"     pm.globals.set(\"counter\", 1);\r",
+									"     pm.globals.set(\"arrayLength\", res.json().length)\r",
+									"     pm.environment.set(\"id\", res.json()[0].bookingid);\r",
+									"\r",
+									"    }\r",
+									"\r",
+									"    else{\r",
+									"        try{\r",
+									"         let counter = pm.globals.get(\"counter\");\r",
+									"        pm.environment.set(\"id\", res.json()[counter].bookingid);\r",
+									"        }\r",
+									"        catch(e){\r",
+									"            cleanup()\r",
+									"            pm.test(\"Something went wrong\", () => {throw new Error(e.message)}); \r",
+									"        }\r",
+									"    }\r",
+									"    \r",
+									"});\r",
+									"function cleanup() {\r",
+									"\r",
+									"    pm.environment.unset(\"id\");\r",
+									"    pm.globals.unset(\"counter\");\r",
+									"    pm.globals.unset(\"arrayLength\");\r",
+									"    pm.globals.unset(\"bookingIds\");\r",
+									"\r",
+									"}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "945c7c4f-f0c0-4ef4-9124-0db5664921a1",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"try{\r",
+									" let counter = pm.globals.get(\"counter\");\r",
+									" if(counter<(parseInt(pm.globals.get(\"arrayLength\")))-1){\r",
+									"     let _bookingId =JSON.parse(pm.globals.get(\"bookingIds\")[counter])\r",
+									"     pm.globals.set(\"counter\", counter + 1);\r",
+									"     console.log(_bookingId);\r",
+									"     postman.setNextRequest('Get Single Booking')\r",
+									" }\r",
+									"\r",
+									" else{\r",
+									"     cleanup();\r",
+									" }\r",
+									"    // this will only execute if no exception raised\r",
+									"}catch(e){\r",
+									"    cleanup()\r",
+									"    pm.test(\"Something went wrong\", () => {throw new Error(e.message)}); \r",
+									"}\r",
+									"\r",
+									"function cleanup() {\r",
+									"    pm.environment.unset(\"id\");\r",
+									"    pm.globals.unset(\"counter\");\r",
+									"    pm.globals.unset(\"arrayLength\");\r",
+									"    pm.globals.unset(\"bookingIds\");\r",
+									"}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "{{baseURL}}/booking/{{id}}",
 							"host": [
