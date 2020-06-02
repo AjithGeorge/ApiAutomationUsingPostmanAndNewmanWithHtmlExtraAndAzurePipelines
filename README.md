@@ -151,6 +151,14 @@ postman.setNextRequest() is always executed at the end of the current request. T
 
 ## Single test to iterate over a set of data
 Instead of writing the same test script for different endpoints/ids the same test could be used to iterate over the data without any repetition of the code. (DRY -Don't Repeat Your code)
+<p> Pre-Script: Handles the initial gathering of ids and setting the variables.</p>
+<img src=https://github.com/AjithGeorge/API-Automation-Postman/blob/master/assets/Pre-Script.png>
+
+<p>Test Script: Handles the looping logic and teardown. </p>
+<img src=https://github.com/AjithGeorge/API-Automation-Postman/blob/master/assets/Test%20Script.png>
+
+<p> Variables: Through which the data is transferred for subsequent request</p>
+<img src=https://github.com/AjithGeorge/API-Automation-Postman/blob/master/assets/Variables.png>
 
 
 ## Tips#
