@@ -16,6 +16,8 @@ The solution tests APIs from,
 
 1. [Restful-Booker -Self Hosted](https://github.com/mwinteringham/restful-booker)
 2. [Restful-Booker -Public Link](https://restful-booker.herokuapp.com/)
+3. Other API endpoints available are: [Random User](https://randomuser.me/api/) and [Httpbin](https://httpbin.org/#/)
+
 
 
 ## Prerequisites:
