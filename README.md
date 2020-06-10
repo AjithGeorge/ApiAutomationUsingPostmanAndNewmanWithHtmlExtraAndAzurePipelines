@@ -8,6 +8,7 @@ API Testing using Postman
 - Generate Report using [Newman reporter](https://www.npmjs.com/package/newman-reporter-html)
 - Customized Newman Reporter -[htmlextra](https://github.com/DannyDainton/newman-reporter-htmlextra)
 - Assertions using [Chai Assertion Library](https://www.chaijs.com/api/)
+- Azure Pipeline Integration [Azure CI/CD](https://dev.azure.com/ajithgeorgethekkel0427/Postman%20API%20Testing)
 
 Main Reference: [DannyDainton: All-Things-Postman](https://github.com/DannyDainton/All-Things-Postman#example-guides)
 
