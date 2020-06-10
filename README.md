@@ -1,3 +1,6 @@
+[![Build Status](https://dev.azure.com/ajithgeorgethekkel0427/Postman%20API%20Testing/_apis/build/status/Postman-API-Testing-CI?branchName=master)](https://dev.azure.com/ajithgeorgethekkel0427/Postman%20API%20Testing/_build?definitionId=1)
+
+
 # API-Automation-Postman
 
 API Testing using Postman 
