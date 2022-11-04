@@ -246,4 +246,5 @@ cleanup()
 ```
 
 ## Sample Report
+file: [HtmlExtraReport.html](/Report/Restful_Booker_Collection-2020-05-26-12-08-32-828-0.html)
 <img src=https://github.com/AjithGeorge/API-Automation-Postman/blob/master/assets/Report-Sample.png>
