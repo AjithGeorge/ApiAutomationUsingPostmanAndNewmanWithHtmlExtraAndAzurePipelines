@@ -22,7 +22,7 @@ The solution tests APIs from,
 2. [Restful-Booker -Public Link](https://restful-booker.herokuapp.com/)
 3. Other API endpoints available are: [Random User](https://randomuser.me/api/) and [Httpbin](https://httpbin.org/#/)
 
-Azure CI/CD integration working modal is available at: [ajithgeorgethekkel0427](https://dev.azure.com/ajithgeorgethekkel0427/Postman%20API%20Testing)
+Azure CI/CD integration working modal is available at: [ajithgeorgethekkel0427](https://dev.azure.com/ajithgeorgethekkel0427/Postman%20API%20Testing/_build)
 
 
 ## Prerequisites:
